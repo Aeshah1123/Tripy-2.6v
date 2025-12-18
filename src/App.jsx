@@ -1,0 +1,128 @@
+/**
+ * ملف App.jsx - المكون الرئيسي للتطبيق
+ * يدير:
+ * - التنقل بين الصفحات (Router)
+ * - الحالة العامة للثيم والمصادقة (Contexts)
+ * - تحديد جميع المسارات والصفحات المحمية
+ */
+
+import {
+  HashRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
+import { useEffect } from "react";
+import { ThemeProvider } from "./contexts/ThemeContext.jsx";
+import { AuthProvider } from "./contexts/AuthContext.jsx";
+import { LanguageProvider } from "./contexts/LanguageContext.jsx";
+import { MainLayout } from "./layouts/MainLayout.jsx";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
+import Home from "./pages/Home.jsx";
+import BookingDetailsPage from "./pages/BookingDetailsPage.jsx";
+import BookingConfirmationPage from "./pages/BookingConfirmationPage.jsx";
+import PaymentPage from "./pages/PaymentPage.jsx";
+import PaymentSuccessPage from "./pages/PaymentSuccessPage.jsx";
+import InvoicePage from "./pages/InvoicePage.jsx";
+import AuthPage from "./pages/AuthPage.jsx";
+import Dashboard from "./pages/Dashboard.jsx";
+import { Login } from "./pages/auth/Login.jsx";
+import { Signup } from "./pages/auth/Signup.jsx";
+
+// مكون للانتقال لأعلى الصفحة عند تغيير المسار
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
+
+function App() {
+  return (
+    <ThemeProvider>
+      <AuthProvider>
+        <LanguageProvider>
+          <Router>
+            <ScrollToTop />
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <MainLayout>
+                    <Home />
+                  </MainLayout>
+                }
+              />
+              <Route path="/login" element={<AuthPage />} />
+              <Route
+                path="/dashboard"
+                element={
+                  <ProtectedRoute>
+                    <MainLayout>
+                      <Dashboard />
+                    </MainLayout>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/booking-details"
+                element={
+                  <ProtectedRoute>
+                    <MainLayout>
+                      <BookingDetailsPage />
+                    </MainLayout>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/booking-confirmation"
+                element={
+                  <ProtectedRoute>
+                    <MainLayout>
+                      <BookingConfirmationPage />
+                    </MainLayout>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/payment"
+                element={
+                  <ProtectedRoute>
+                    <MainLayout>
+                      <PaymentPage />
+                    </MainLayout>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/payment-success"
+                element={
+                  <ProtectedRoute>
+                    <MainLayout>
+                      <PaymentSuccessPage />
+                    </MainLayout>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/invoice/:invoiceId"
+                element={
+                  <ProtectedRoute>
+                    <InvoicePage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route path="/auth/login" element={<Login />} />
+              <Route path="/auth/signup" element={<Signup />} />
+            </Routes>
+          </Router>
+        </LanguageProvider>
+      </AuthProvider>
+    </ThemeProvider>
+  );
+}
+
+export default App;
