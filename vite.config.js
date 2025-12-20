@@ -9,7 +9,7 @@ export default defineConfig({
       fastRefresh: false,
     }),
   ],
-  base: "/Triply-v2.4/",
+  base: "/Triply-v2.5/",
   server: {
     host: true,
     port: 5173,
