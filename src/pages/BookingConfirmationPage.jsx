@@ -29,6 +29,10 @@ function BookingConfirmationPage() {
       return;
     }
 
+    console.log('🔍 BookingConfirmationPage - Booking Data:', data);
+    console.log('📍 Destination:', data.destination);
+    console.log('🏷️ Category:', data.category);
+
     setBookingData(data);
     
     // إنشاء رقم تأكيد عشوائي

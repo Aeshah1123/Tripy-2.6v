@@ -575,6 +575,18 @@ const en = {
     midRange: "Mid-Range",
     luxury: "Luxury",
     
+    // Destinations
+    dest_london: "London 🇬🇧",
+    dest_paris: "Paris 🇫🇷",
+    dest_turkey: "Istanbul 🇹🇷",
+    dest_dubai: "Dubai 🇦🇪",
+    dest_egypt: "Cairo 🇪🇬",
+    
+    // Categories
+    category_budget: "Budget 💰",
+    category_midRange: "Mid-Range ⭐",
+    category_luxury: "Luxury 💎",
+    
     step1Title: "Step 1: Choose Destination, Category & Dates",
     step1Description: "Set your trip's basic information",
     destinationLabel: "Destination",
